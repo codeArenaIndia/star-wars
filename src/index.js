@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 //import App from './App';
-import Planets from './pages/Planets';
+//import Planets from './pages/Planets';
+import Login from './pages/Login';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Planets />
+    <Login />
   </React.StrictMode>,
   document.getElementById('root')
 );
