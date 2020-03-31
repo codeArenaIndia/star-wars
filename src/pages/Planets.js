@@ -1,6 +1,7 @@
 import React , {useState, useEffect } from 'react';
 import swapi from 'swapi-node';
 import { handleNavigationHelper, debounce } from '../Components/Helper'
+import "./Planets.css";
 
 export default function Planets(){
   const [planets,setPlanets] = useState([]);
@@ -22,6 +23,7 @@ export default function Planets(){
         }else {
           setPlanets(response.results);
         }
+        console.log(response.results);
         setCount(response.count);
         if(maxPage >= page){
           console.log('innn');
@@ -49,25 +51,34 @@ export default function Planets(){
     setPage(1);
   }, 250);
 
+  const generateRandom = () =>{
+   return Math.floor(Math.random() * 10);
+  }
 
 
   return (
-    <div className="planetContainer">
-        <input type="text" onChange={event=> handleSearch(event.target)}/>
-        <p>Current page {page}</p>
-        <p>Total: {count}</p>
-        {
-            loading ? (<p>Loading result...</p>) : 
-            (<ul>
-                {planets.map(results => (
-                    <li key={results.name}>
-                        {results.name}
-                    </li>
+    <div className="planetContainer col-md-12">
+      <header>
+        <h1>Planets</h1>
+        <input type="search" className="searchBar" onChange={event=> handleSearch(event.target)}/>
+      </header>
+      <>  
+          <div className="planet-list col-md-12 col-xs-12">
+                {planets.map((results,key) => (
+                    <div key={results.name} className="plant-cards card col-md-3" style={{float:"left",margin:"10px"}}>
+                      <div className={`card-body gradient${generateRandom()}`}>
+                            <h5>{results.name}</h5>
+                            <p>Population: {results.population}</p>
+                            <p>Climate: {results.climate}</p>
+                            <p>Rotation period: {results.rotation_period}</p>
+                            <p>Surface water: {results.surface_water}</p>
+                        </div>
+                    </div>
                 ))}
-            </ul>)
-        }
-        {error && <div>Error: {error.message}</div>}
-        <button type="button" onClick={event => handleNavigation(event.target)} data-nav={next}>More</button>
+            </div>
+        
+      </>
+      <button type="button" className="loadmore-btn btn btn-info" onClick={event => handleNavigation(event.target)} data-nav={next}>Load More</button>
     </div>
   )
 }

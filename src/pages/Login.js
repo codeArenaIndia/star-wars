@@ -1,26 +1,30 @@
 import React, { useState } from 'react';
+import { Redirect } from "react-router-dom";
 import swapi from 'swapi-node';
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 import "./Login.css";
-
+//import { Redirect } from 'react-router-dom';
 export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [error,setError] = useState("");
-
+  const [isAuth,setIsAuth] = useState(false);
+  
+  if (isAuth) {
+    return <Redirect to="/planets"/>
+  }
+  
   function validateForm() {
     return username.length > 0 && password.length > 0;
   }
 
   async function handleSubmit(event) {
-    console.log(username);
     event.preventDefault();
     try{
         const response =  await swapi.get(`https://swapi.co/api/people/?search=${username}&format=json`);
-        console.log(response.results[0].name,response.results[0].birth_year);
         if(username === response.results[0].name && password === response.results[0].birth_year){
-          console.log('success');
+          localStorage.setItem('user',JSON.stringify({"isLoggedIn":true,"username":username}));
+          console.log(response.results);
+          setIsAuth(true);
         }
         else {
           console.log("error");
