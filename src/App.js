@@ -7,7 +7,6 @@ import { createBrowserHistory } from 'history'
 
 export default function App(){
   const [redirctTo, setRedirctTo] = useState(false);
-  console.log('app.js');
   useEffect(()=>{
     if (Auth()) {
       setRedirctTo(true);

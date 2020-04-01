@@ -148,9 +148,8 @@ h1.title{
 .loadmore-btn {
     position: fixed;
     bottom: 2%;
-    right: 3%;
+    right: 1%;
 }
-/****color Gradients *****/
   
   .gradient2 {
       background-image: linear-gradient(

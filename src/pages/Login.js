@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import swapi from 'swapi-node';
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 import "./Login.css";
-//import { Redirect } from 'react-router-dom';
+
 export default function Login(props) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
