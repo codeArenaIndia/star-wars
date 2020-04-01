@@ -6,7 +6,7 @@ function Cards({results,handleShowModal, key}){
         <div key={results.name} className="plant-cards card">
             <div className="card-body">
             <div className="card-box-body">
-                <p className="population"><span>Population:</span> <span  className="text-green bold">{results.population}</span></p>
+                <p className="population"><span>Population:</span> <span style={{fontSize: `${results.population.length+10}px`}}  className="text-green bold">{results.population}</span></p>
                 <div className="width-100 diamter-water common-card ">
                     <p className="width-100 "><span>Diameter: </span> <span className="text-white bold">{results.diameter}</span></p>
                     <p className="width-100 "><span>Gravity: </span><span className="text-white bold">{results.gravity}</span></p>

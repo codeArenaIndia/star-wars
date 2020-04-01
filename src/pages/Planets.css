@@ -97,7 +97,7 @@ button[data-pointer="block"],button[data-nav="done"] {
     background: transparent;
     color: white; 
     border-radius: 5px;
-    margin-left: 20px;
+    margin-left: 30px;
 }
 @media only screen and (max-width: 600px) {
     .searchBar {
@@ -146,7 +146,7 @@ button[data-pointer="block"],button[data-nav="done"] {
     background: #000;;
     color: #fff;
     opacity: 0.8;
-    min-width: 280px;
+    min-width: 300px;
 }
 .plant-cards:hover {
     -webkit-transform: scale(1.1);
@@ -196,7 +196,7 @@ button[data-pointer="block"],button[data-nav="done"] {
 }
 h1.title{
     color: #fff;
-    padding-left: 20px;
+    padding-left: 30px;
 }
 .loadmore-btn {
     float: right;
