@@ -49,7 +49,7 @@ export default function Login(props) {
       <h1 className="col-md-5 title">Galactic Empire</h1>
       <h2 className="col-md-12 login-title text-white">Login to database</h2>
       <form onSubmit={handleSubmit}>
-      <h5 className="col-md-12 login-title">May the force be with you</h5>
+      <h5 className="col-md-12 login-title force-with-u">May the force be with you</h5>
         <FormGroup controlId="username" >
           <label className="text-white">Username (case-insensitive)</label>
           <FormControl

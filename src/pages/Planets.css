@@ -87,6 +87,9 @@ button[data-pointer="block"],button[data-nav="done"] {
 .transparent {
     background: transparent;
 }
+.force-with-u {
+    color: darkgoldenrod;
+}
 .searchBar {
     padding: 10px;
     font-size: 17px;
@@ -96,6 +99,17 @@ button[data-pointer="block"],button[data-nav="done"] {
     border-radius: 5px;
     margin-left: 20px;
 }
+@media only screen and (max-width: 600px) {
+    .searchBar {
+        width: 33%;
+    }
+    .mobile-signout {
+        float: none !important;
+    }
+    h1.title{
+        text-align: center;
+    }
+  }
 
 .scrollbar::-webkit-scrollbar-track
 {

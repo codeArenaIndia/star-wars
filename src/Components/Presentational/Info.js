@@ -9,7 +9,7 @@ return(
           <Modal.Title>Planet: {modalData.name}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-            <p>Name: {modalData}</p>
+            <p>Name: {modalData.name}</p>
             <p>Rotation_period: {modalData.rotation_period}</p>
             <p>Orbital_period: {modalData.orbital_period}</p>
             <p>Diameter: {modalData.diameter}</p>
