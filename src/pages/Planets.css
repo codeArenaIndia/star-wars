@@ -115,12 +115,13 @@ button[data-pointer="block"],button[data-nav="done"] {
 {
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: rgb(23, 162, 184);;
+	background-color: grey;
 }
 
 .planet-list {
     height: 510px;
     overflow: auto;
+    padding-top: 15px;
 }
 .plant-cards{
    float: left;
@@ -128,8 +129,9 @@ button[data-pointer="block"],button[data-nav="done"] {
     padding: 0;
     line-height: 15px;
     position: relative;
-    background: transparent;
+    background: #000;;
     color: #fff;
+    opacity: 0.8;
     min-width: 280px;
 }
 .plant-cards:hover
@@ -147,14 +149,18 @@ button[data-pointer="block"],button[data-nav="done"] {
 .card-box-name {
     position: absolute;
     bottom: 0;
-    margin-bottom: 0;
     left: 0;
     height: 40px;
-    background: #7f0303;
     font-weight: bold;
     width: 100%;
     text-align: center;
     padding: 10px;
+    color: white;
+    background: transparent;
+    border: 1px solid #fff;
+}
+.text-white {
+    color: #fff;
 }
 .opacity-body {
     height: 100%;

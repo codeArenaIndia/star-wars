@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route, Redirect  } from "react-router-dom";
+import { HashRouter as Router, Switch, Route, Redirect  } from "react-router-dom";
 import Planets from './pages/Planets';
 import Login from './pages/Login';
 import Auth from './Components/Helper/Auth'

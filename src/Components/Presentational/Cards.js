@@ -8,12 +8,12 @@ function Cards({results}){
             <div className="card-box-body">
                 <p><span>Population:</span> <span  className="text-green bold">{results.population}</span></p>
                 <div className="width-100 diamter-water common-card ">
-                    <p className="width-100 "><span>Diameter: </span> <span className="text-red bold">{results.diameter}</span></p>
-                    <p className="width-100 "><span>Gravity: </span><span className="text-red bold">{results.gravity}</span></p>
+                    <p className="width-100 "><span>Diameter: </span> <span className="text-white bold">{results.diameter}</span></p>
+                    <p className="width-100 "><span>Gravity: </span><span className="text-white bold">{results.gravity}</span></p>
                 </div>
                 <div className="width-100 climate-rotation common-card">
-                    <p className="width-100"><span>Climate: </span> <span className="text-red bold">{results.climate}</span></p>
-                    <p className="width-100"><span>Rotation period: </span><span className="text-red bold">{results.rotation_period}</span></p>
+                    <p className="width-100"><span>Climate: </span> <span className="text-white bold">{results.climate}</span></p>
+                    <p className="width-100"><span>Rotation period: </span><span className="text-white bold">{results.rotation_period}</span></p>
                 </div>
                 
             </div>

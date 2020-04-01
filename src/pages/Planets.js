@@ -61,7 +61,7 @@ export default function Planets(){
     <div className="planetContainer col-md-12 npr">
       <header className="col-md-12 col-xs-12">
         <h1 className="col-md-5 title pull-left">Galactic Empire: Planets</h1>
-        <div className="text-red col-md-4 pull-left" style={{padding: "15px"}}>Welcome {username.toUpperCase()}</div>
+        <div className="text-white col-md-4 pull-left" style={{padding: "15px",fontSize:"20px"}}>Welcome {username.toUpperCase()}</div>
         <div className="col-md-3 pull-left">
             <Link to={{
                   pathname: '/login',
