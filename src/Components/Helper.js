@@ -33,3 +33,37 @@ export function debounce(func, wait, immediate) {
       if (callNow) func.apply(context, args);
     };
   };
+
+  export function updateCounter(){
+    let getCounter = JSON.parse(localStorage.getItem('counter')) || {};
+    let timeNow = new Date();
+    let username= getCounter.username;
+    if(Object.keys(getCounter).length === 0 || getCounter.username.toLowerCase() === 'luke skywalker' ){
+      localStorage.setItem('counter',JSON.stringify({"count":1,"time": timeNow.getTime(),'username':username}));
+      return true;
+    }
+    else {
+      let timeDiff = getMinutesBetweenDates(getCounter.time,timeNow);
+      console.log(timeDiff);
+      if(timeDiff > 1){
+        localStorage.setItem('counter',JSON.stringify({"count":1,"time": timeNow.getTime(),'username':username}));
+      }
+      else {
+        if(getCounter.count < 17){
+          localStorage.setItem('counter',JSON.stringify({"count":getCounter.count+1,"time": timeNow.getTime(),'username':username}));
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
+    }
+    
+  }
+
+  function getMinutesBetweenDates(startDate, endDate) {
+    console.log(startDate);
+    console.log(endDate);
+      var diff = endDate - startDate;
+      return (diff / 60000);
+  }

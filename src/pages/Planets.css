@@ -3,7 +3,7 @@ body{
     height: 100%;  
    /* background: -webkit-linear-gradient(to right, #000000, #0e0303); 
     background: linear-gradient(to right, #000000, #0e0303); */
-    background: url(./planet.jpg);
+    background: url(../Assets/planet.jpg);
     background-size: cover;
 }
 .spinner {
@@ -29,13 +29,21 @@ body{
 .width-100{
     width: 100%;
 }
-.climate-rotation {
+.diamter-water{
+    position: absolute;
+    bottom: 120px;
+    left: 0;
+}
+.common-card {
     font-size: 16px;
+    padding: 5px 20px;
+    height: 72px;
+
+}
+.climate-rotation {
     position: absolute;
     left: 0;
-    padding: 5px 20px;
-    height: 70px;
-    bottom: 40px;
+    bottom: 50px; 
 }
 .spinner p {
     position: absolute;
@@ -53,6 +61,9 @@ body{
     border-radius: 50%;
     box-shadow: 0 0 5px white;
     margin: auto 0;
+    position: absolute;
+    opacity: 0.3;
+    margin: 10px;
 
 }
 button[data-pointer="block"],button[data-nav="done"] {
@@ -65,20 +76,25 @@ button[data-pointer="block"],button[data-nav="done"] {
     margin: 20px 0;
     height: 50px;
     padding-right: 0;
+    padding-left: 0;
 }
 .npr {
     padding-right: 0;
 }
 .count {
-    padding-top: 15px;
+    padding-top: 10px;
 }
-
+.transparent {
+    background: transparent;
+}
 .searchBar {
     padding: 10px;
     font-size: 17px;
     border: 1px solid grey;
-    background: #f1f1f1;
+    background: transparent;
+    color: white; 
     border-radius: 5px;
+    margin-left: 20px;
 }
 
 .scrollbar::-webkit-scrollbar-track
@@ -103,7 +119,7 @@ button[data-pointer="block"],button[data-nav="done"] {
 }
 
 .planet-list {
-    height: 560px;
+    height: 510px;
     overflow: auto;
 }
 .plant-cards{
@@ -114,7 +130,13 @@ button[data-pointer="block"],button[data-nav="done"] {
     position: relative;
     background: transparent;
     color: #fff;
-    min-width: 210px;
+    min-width: 280px;
+}
+.plant-cards:hover
+{
+    -webkit-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    transform: scale(1.1);
 }
 .text-green {
     color: green;
@@ -128,7 +150,8 @@ button[data-pointer="block"],button[data-nav="done"] {
     margin-bottom: 0;
     left: 0;
     height: 40px;
-    background: green;
+    background: #7f0303;
+    font-weight: bold;
     width: 100%;
     text-align: center;
     padding: 10px;
@@ -138,7 +161,7 @@ button[data-pointer="block"],button[data-nav="done"] {
     width: 100%;
     position: absolute;
     background: #fff;
-    opacity: 0.3;
+    opacity: 0.1;
     border-radius: 5px;
 }
 h1.title{
@@ -146,78 +169,77 @@ h1.title{
     padding-left: 20px;
 }
 .loadmore-btn {
-    position: fixed;
-    bottom: 2%;
-    right: 1%;
+    float: right;
+    margin-right: 14px;
 }
   
-  .gradient2 {
-      background-image: linear-gradient(
-      rgba(221, 221, 221, .5),
-      rgba(221, 221, 221, .75)
-  );
-      background-color: #FFDC00;
-  }
-  
-  .gradient3 {
-      background-image:
-      linear-gradient(
-      rgba(0, 116, 217, .5),
-      rgba(255, 255, 255, .25),
-      rgba(0, 116, 217, .5)
-  ),
-      linear-gradient(
-      to right,
-      rgba(0, 116, 217, .5),
-      rgba(255, 255, 255, .25),
-      rgba(0, 116, 217, .5)
-  );
-      background-color: #ddd;
-  }
-  
-  .gradient4 {
-      background-image: linear-gradient(
-      rgba(255, 133, 27, .75),
-      rgba(0, 0, 0, .75),
-      rgba(255, 133, 27, .75)
-  );
-      background-color: #ddd;
-  }
-  
-  .gradient5 {
-      background-image:
-      linear-gradient(
-      rgba(0, 116, 217, .5),
-      rgba(255, 133, 27, .25),
-      rgba(0, 116, 217, .5)
-  ), linear-gradient(
-      to right,
-      rgba(0, 116, 217, .5),
-      rgba(255, 133, 27, .25),
-      rgba(0, 116, 217, .5)
-  );
-      background-color: #ddd;
-  }
-  
-  .gradient0 {
-      background-image: linear-gradient(
-      rgba(255, 133, 27, .5),
-      rgba(255, 220, 0, .25),
-      rgba(255, 255, 255, .5)
-  ),linear-gradient(
-      to right,
-      rgba(255, 133, 27, .5),
-      rgba(255, 220, 0, .25),
-      rgba(255, 255, 255, .5)
-  );
-      background-color: #ddd;   
-  }
-  
-  .gradient1 {
-      background-image: linear-gradient(
-      rgba(0, 116, 217, .5),
-      rgba(221, 221, 221, .75)
-  ), linear-gradient(#FFDC00, #FFFFFF) ;
-      background-color: none;
-  }
+.gradient2 {
+    background-image: linear-gradient(
+    rgba(221, 221, 221, .5),
+    rgba(221, 221, 221, .75)
+);
+    background-color: #FFDC00;
+}
+
+.gradient3 {
+    background-image:
+    linear-gradient(
+    rgba(0, 116, 217, .5),
+    rgba(255, 255, 255, .25),
+    rgba(0, 116, 217, .5)
+),
+    linear-gradient(
+    to right,
+    rgba(0, 116, 217, .5),
+    rgba(255, 255, 255, .25),
+    rgba(0, 116, 217, .5)
+);
+    background-color: #ddd;
+}
+
+.gradient4 {
+    background-image: linear-gradient(
+    rgba(255, 133, 27, .75),
+    rgba(0, 0, 0, .75),
+    rgba(255, 133, 27, .75)
+);
+    background-color: #ddd;
+}
+
+.gradient5 {
+    background-image:
+    linear-gradient(
+    rgba(0, 116, 217, .5),
+    rgba(255, 133, 27, .25),
+    rgba(0, 116, 217, .5)
+), linear-gradient(
+    to right,
+    rgba(0, 116, 217, .5),
+    rgba(255, 133, 27, .25),
+    rgba(0, 116, 217, .5)
+);
+    background-color: #ddd;
+}
+
+.gradient0 {
+    background-image: linear-gradient(
+    rgba(255, 133, 27, .5),
+    rgba(255, 220, 0, .25),
+    rgba(255, 255, 255, .5)
+),linear-gradient(
+    to right,
+    rgba(255, 133, 27, .5),
+    rgba(255, 220, 0, .25),
+    rgba(255, 255, 255, .5)
+);
+    background-color: #ddd;   
+}
+
+.gradient1 {
+    background-image: linear-gradient(
+    rgba(0, 116, 217, .5),
+    rgba(221, 221, 221, .75)
+), linear-gradient(#FFDC00, #FFFFFF) ;
+    background-color: none;
+}
 /*****Gradient-color****/

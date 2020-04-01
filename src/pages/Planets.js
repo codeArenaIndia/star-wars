@@ -1,9 +1,8 @@
 import React , {useState, useEffect } from 'react';
 import swapi from 'swapi-node';
-import { handleNavigationHelper, debounce } from '../Components/Helper'
+import { handleNavigationHelper, debounce ,updateCounter} from '../Components/Helper'
 import "./Planets.css";
-import { Redirect } from 'react-router';
-import Auth from '../Components/Auth'
+import { Link } from 'react-router-dom';
 import Cards from '../Components/Cards'
 
 export default function Planets(){
@@ -13,9 +12,19 @@ export default function Planets(){
   const [next,setNext] = useState(null);
   const [query,setQuery] = useState("");
   const [loading,setLoading] = useState("none");
+  const [restricted,setRestricted] = useState("");
+  const [username,setUsername]= useState("");
 
 
   const getResults = async(queries,pages) =>{
+    if(!updateCounter()){
+      setPlanets([]);
+      setRestricted("Maximum Api request limit reached. Please try after a minute.")
+      return false;
+    }
+    else{
+      setRestricted("")
+    }
     setLoading("block");
     try{
       const response =  await swapi.get(`https://swapi.co/api/planets/?page=${pages}&format=json&search=${queries}`);
@@ -38,8 +47,8 @@ export default function Planets(){
     setLoading("none");
   }
   useEffect(()=>{
-    console.log("rendered");
     getResults(query,page);
+    setUsername(JSON.parse(localStorage.getItem('counter')).username);
   },[query,page]);
   
   const handleSearch = debounce(function(target) {
@@ -51,21 +60,29 @@ export default function Planets(){
   return (
     <div className="planetContainer col-md-12 npr">
       <header className="col-md-12 col-xs-12">
-        <h1 className="col-md-5 title pull-left">Star Wars Database: Planets</h1>
-        <input type="search" className="searchBar col-md-3 pull-left" onChange={event=> handleSearch(event.target)} placeholder="Search Planets"/>
-        <p  className="count col-md-2 pull-left">Showing: {planets.length} of {count}</p>
-        <div className="col-md-2 pull-left">
-          <button type="button" className="btn btn-danger pull-right">Sign Out</button>
+        <h1 className="col-md-5 title pull-left">Galactic Empire: Planets</h1>
+        <div className="text-red col-md-4 pull-left" style={{padding: "15px"}}>Welcome {username.toUpperCase()}</div>
+        <div className="col-md-3 pull-left">
+            <Link to={{
+                  pathname: '/login',
+                  state: {
+                    logout: true
+                  }
+            }}><button type="button" className="btn btn-danger transparent pull-right">Sign Out</button>
+          </Link>
         </div>
       </header>
-          <div className="planet-list col-md-12 col-xs-12 style-2 scrollbar">
-                {planets.map((results,key) => (
-                    <Cards results={results}/>
-                ))}
-                {planets.length === 0 && loading === "none" ? (<p style={{color: "#fff"}}>No record found</p>) : ("")}
-                <div className="spinner" style={{display: `${loading}`}}></div>
-            </div>
-      <button type="button" className="loadmore-btn btn btn-info" data-pointer={loading} onClick={event => setPage(handleNavigationHelper(event.target))} data-nav={next}>{loading == "block" ? "loading..." : "Load More"}</button>
+        <input type="search" className="searchBar col-md-3 pull-left" onChange={event=> handleSearch(event.target)} placeholder="Search Planets"/>
+        <button type="button" className="loadmore-btn btn btn-success transparent pull-left" data-pointer={loading} onClick={event => setPage(handleNavigationHelper(event.target))} data-nav={next}>{loading === "block" ? "loading..." : "Load More"}</button>
+        <p  className="count col-md-2 pull-left text-white">Showing: {planets.length} of {count ? count : 0}</p>
+        <div className="planet-list col-md-12 col-xs-12 style-2 scrollbar">
+          {restricted !== "" ? (<div class="alert alert-danger">{restricted}</div>) : ""}
+            {planets.map((results,key) => (
+                <Cards key={results.name +key} results={results}/>
+            ))}
+            {planets.length === 0 && loading === "none" ? (<p style={{color: "#fff"}}>No record found</p>) : ("")}
+            <div className="spinner" style={{display: `${loading}`}}></div>
+        </div>
     </div>
   )
 }
