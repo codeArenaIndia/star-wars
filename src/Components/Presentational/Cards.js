@@ -1,5 +1,5 @@
 import React from 'react';
-import {  generateRandom } from './Helper';
+import {  generateRandom } from '../Helper/Helper';
 
 function Cards({results}){
     return (

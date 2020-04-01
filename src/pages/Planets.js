@@ -1,9 +1,9 @@
 import React , {useState, useEffect } from 'react';
 import swapi from 'swapi-node';
-import { handleNavigationHelper, debounce ,updateCounter} from '../Components/Helper'
+import { handleNavigationHelper, debounce ,updateCounter} from '../Components/Helper/Helper'
 import "./Planets.css";
 import { Link } from 'react-router-dom';
-import Cards from '../Components/Cards'
+import Cards from '../Components/Presentational/Cards'
 
 export default function Planets(){
   const [planets,setPlanets] = useState([]);
