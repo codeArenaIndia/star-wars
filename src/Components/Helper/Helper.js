@@ -44,7 +44,6 @@ export function debounce(func, wait, immediate) {
     }
     else {
       let timeDiff = getMinutesBetweenDates(getCounter.time,timeNow);
-      console.log(timeDiff);
       if(timeDiff > 1){
         localStorage.setItem('counter',JSON.stringify({"count":1,"time": timeNow.getTime(),'username':username}));
       }
@@ -62,8 +61,6 @@ export function debounce(func, wait, immediate) {
   }
 
   function getMinutesBetweenDates(startDate, endDate) {
-    console.log(startDate);
-    console.log(endDate);
       var diff = endDate - startDate;
       return (diff / 60000);
   }

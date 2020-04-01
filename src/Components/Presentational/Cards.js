@@ -1,7 +1,7 @@
 import React , {useState, useEffect } from 'react';
 import {  generateRandom } from '../Helper/Helper';
 
-function Cards({results,handleShowModal, key}){
+function Cards({results,handleShowModal}){
     return (
         <div key={results.name} className="plant-cards card">
             <div className="card-body">

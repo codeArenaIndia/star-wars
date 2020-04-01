@@ -68,7 +68,7 @@ export default function Planets(){
     setPlanets([]);
     setQuery(target.value);
     setPage(1);
-  }, 1000);
+  }, 600);
 
   return (
     <div className="planetContainer col-md-12 npr">
@@ -89,13 +89,13 @@ export default function Planets(){
         <button type="button" className="loadmore-btn btn btn-success transparent pull-left" data-pointer={loading} onClick={event => setPage(handleNavigationHelper(event.target))} data-nav={next}>{loading === "block" ? "loading..." : "Load More"}</button>
         <p  className="count col-md-2 pull-left text-white">Showing: {planets.length} of {count ? count : 0}</p>
         <div className="planet-list col-md-12 col-xs-12 style-2 scrollbar">
-          <div class="col-md-12 text-white">The image size inside the tiles denotes the comparative size of planet's population</div>
-          {restricted !== "" ? (<div class="alert alert-danger">{restricted}</div>) : ""}
+          <div className="col-md-12 text-white">The image size inside the tiles denotes the comparative size of planet's population</div>
+          {restricted !== "" ? (<div className="alert alert-danger">{restricted}</div>) : ""}
             {planets.map((results,key) => (
                 <Cards key={results.name +key} key={key} results={results} handleShowModal={handleShowModal}/>
             ))}
             <Info handleClose={handleClose} modalData={modalData} show={show}/>
-            {planets.length === 0 && loading === "none" ? (<p style={{color: "#fff"}}>No record found</p>) : ("")}
+            {planets.length === 0 && loading === "none" ? (<p style={{color: "#fff",margin: "15px"}}>No record found</p>) : ("")}
             <div className="spinner" style={{display: `${loading}`}}></div>
         </div>
     </div>
