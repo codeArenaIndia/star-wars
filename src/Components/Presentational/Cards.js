@@ -1,12 +1,12 @@
-import React from 'react';
+import React , {useState, useEffect } from 'react';
 import {  generateRandom } from '../Helper/Helper';
 
-function Cards({results}){
+function Cards({results,handleShowModal, key}){
     return (
         <div key={results.name} className="plant-cards card">
             <div className="card-body">
             <div className="card-box-body">
-                <p><span>Population:</span> <span  className="text-green bold">{results.population}</span></p>
+                <p className="population"><span>Population:</span> <span  className="text-green bold">{results.population}</span></p>
                 <div className="width-100 diamter-water common-card ">
                     <p className="width-100 "><span>Diameter: </span> <span className="text-white bold">{results.diameter}</span></p>
                     <p className="width-100 "><span>Gravity: </span><span className="text-white bold">{results.gravity}</span></p>
@@ -18,7 +18,8 @@ function Cards({results}){
                 
             </div>
             <div className="card-box-name">
-                <p>{results.name}</p>
+                <p className="pull-left">{results.name}</p>
+                <button type="button" className="btn btn-info pull-right transparent"  onClick={()=> handleShowModal(results)}>View More</button>
             </div>
             </div>
             <div className={`planet-img gradient${generateRandom()}`} style={{width: `${results.population.length*18}px`,height: `${results.population.length*18}px`}}></div>

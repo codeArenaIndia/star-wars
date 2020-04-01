@@ -3,7 +3,8 @@ import swapi from 'swapi-node';
 import { handleNavigationHelper, debounce ,updateCounter} from '../Components/Helper/Helper'
 import "./Planets.css";
 import { Link } from 'react-router-dom';
-import Cards from '../Components/Presentational/Cards'
+import Cards from '../Components/Presentational/Cards';
+import Info from '../Components/Presentational/Info';
 
 export default function Planets(){
   const [planets,setPlanets] = useState([]);
@@ -14,7 +15,10 @@ export default function Planets(){
   const [loading,setLoading] = useState("none");
   const [restricted,setRestricted] = useState("");
   const [username,setUsername]= useState("");
-
+  const [modalData,SetModalData] = useState("");
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const getResults = async(queries,pages) =>{
     if(!updateCounter()){
@@ -51,6 +55,15 @@ export default function Planets(){
     setUsername(JSON.parse(localStorage.getItem('counter')).username);
   },[query,page]);
   
+  const handleShowModal = (results)=>{
+    handleShow();
+    const planetData = [];
+    for (let [key, value] of Object.entries(results)) {
+        planetData[key] = value;
+    }
+    SetModalData(planetData);
+  }
+
   const handleSearch = debounce(function(target) {
     setPlanets([]);
     setQuery(target.value);
@@ -78,8 +91,9 @@ export default function Planets(){
         <div className="planet-list col-md-12 col-xs-12 style-2 scrollbar">
           {restricted !== "" ? (<div class="alert alert-danger">{restricted}</div>) : ""}
             {planets.map((results,key) => (
-                <Cards key={results.name +key} results={results}/>
+                <Cards key={results.name +key} key={key} results={results} handleShowModal={handleShowModal}/>
             ))}
+            <Info handleClose={handleClose} modalData={modalData} show={show}/>
             {planets.length === 0 && loading === "none" ? (<p style={{color: "#fff"}}>No record found</p>) : ("")}
             <div className="spinner" style={{display: `${loading}`}}></div>
         </div>
