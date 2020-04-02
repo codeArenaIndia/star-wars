@@ -1,10 +1,10 @@
 import React , {useState, useEffect } from 'react';
-import swapi from 'swapi-node';
 import { handleNavigationHelper, debounce ,updateCounter} from '../Components/Helper/Helper'
 import "./Planets.css";
 import { Link } from 'react-router-dom';
 import Cards from '../Components/Presentational/Cards';
 import Info from '../Components/Presentational/Info';
+import axios from 'axios';
 
 export default function Planets(){
   const [planets,setPlanets] = useState([]);
@@ -31,8 +31,9 @@ export default function Planets(){
     }
     setLoading("block");
     try{
-      const response =  await swapi.get(`https://swapi.co/api/planets/?page=${pages}&format=json&search=${queries}`);
-        var maxPage = response.count/10;
+      const res =  await axios.get(`https://swapi.co/api/planets/?page=${pages}&format=json&search=${queries}`);
+      let response= res.data; 
+      var maxPage = response.count/10;
         if(planets.length !== 0){
           let res = [...planets,...response.results];
           setPlanets(res);

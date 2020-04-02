@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Redirect } from "react-router-dom";
-import swapi from 'swapi-node';
 import { Button, FormGroup, FormControl } from "react-bootstrap";
 import "./Login.css";
 import { useLocation } from "react-router-dom";
+import axios from 'axios';
 
 export default function Login(props) {
   const [username, setUsername] = useState("");
@@ -28,7 +28,8 @@ export default function Login(props) {
     event.preventDefault();
     setLoading(true);
     try{
-        const response =  await swapi.get(`https://swapi.co/api/people/?search=${username}&format=json`);
+        const res =  await axios.get(`https://swapi.co/api/people/?search=${username}&format=json`);
+        let response= res.data;
         if(username.toLowerCase() === response.results[0].name.toLowerCase() && password === response.results[0].birth_year){
           let timeNow = new Date();
           localStorage.setItem('user',JSON.stringify({"isLoggedIn":true,"username":username}));
