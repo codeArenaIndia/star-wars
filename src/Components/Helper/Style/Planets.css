@@ -3,7 +3,7 @@ body{
     height: 100%;  
    /* background: -webkit-linear-gradient(to right, #000000, #0e0303); 
     background: linear-gradient(to right, #000000, #0e0303); */
-    background: url(../Assets/planet.jpg);
+    background: url(../../../Assets/planet.jpg);
     background-size: cover;
 }
 .spinner {

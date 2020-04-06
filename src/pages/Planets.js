@@ -1,10 +1,10 @@
 import React , {useState, useEffect } from 'react';
 import { handleNavigationHelper, debounce ,updateCounter} from '../Components/Helper/Helper'
-import "./Planets.css";
-import { Link } from 'react-router-dom';
-import Cards from '../Components/Presentational/Cards';
-import Info from '../Components/Presentational/Info';
+import PlanetHeader from '../Components/Presentational/Planet-Header';
+import PlanetBody from '../Components/Presentational/Planet-Body';
+import {SearchInput} from '../Components/Input'
 import axios from 'axios';
+import "../Components/Helper/Style/Planets.css";
 
 export default function Planets(){
   const [planets,setPlanets] = useState([]);
@@ -20,6 +20,13 @@ export default function Planets(){
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  /****************************Mounting,Unmounting and Updating code starts*****************/
+  useEffect(()=>{
+    getResults(query,page);
+    setUsername(JSON.parse(localStorage.getItem('counter')).username);
+  },[query,page]);
+
+
   const getResults = async(queries,pages) =>{
     if(!updateCounter()){
       setPlanets([]);
@@ -33,7 +40,7 @@ export default function Planets(){
     try{
       const res =  await axios.get(`https://swapi.co/api/planets/?page=${pages}&format=json&search=${queries}`);
       let response= res.data; 
-      var maxPage = response.count/10;
+      let maxPage = response.count/10;
         if(planets.length !== 0){
           let res = [...planets,...response.results];
           setPlanets(res);
@@ -41,21 +48,22 @@ export default function Planets(){
           setPlanets(response.results);
         }
         setCount(response.count);
-        if(maxPage > page){
-          setNext(response.next);
-        }else {
-          setNext("done");
-        }
+        maxPage > page ?  setNext(response.next) : setNext("done");
+
     } catch (err){
         console.log('Error',err);
     }
     setLoading("none");
   }
-  useEffect(()=>{
-    getResults(query,page);
-    setUsername(JSON.parse(localStorage.getItem('counter')).username);
-  },[query,page]);
-  
+
+  const handleSearch = debounce(function(target) {
+    setPlanets([]);
+    setQuery(target.value);
+    setPage(1);
+  }, 600);
+  /****************************Mounting,Unmounting and Updating ends*****************/
+
+  /*****************Onclick modal box code starts *****************************/
   const handleShowModal = (results)=>{
     handleShow();
     const planetData = [];
@@ -65,40 +73,14 @@ export default function Planets(){
     SetModalData(planetData);
   }
 
-  const handleSearch = debounce(function(target) {
-    setPlanets([]);
-    setQuery(target.value);
-    setPage(1);
-  }, 600);
-
+  /************************Onclick modal box code ends ************************/
   return (
     <div className="planetContainer col-md-12 npr">
-      <header className="col-md-12 col-xs-12">
-        <h1 className="col-md-5 title pull-left">Galactic Empire: Planets</h1>
-        <div className="text-white col-md-4 pull-left" style={{padding: "15px",fontSize:"20px"}}>Welcome {username.toUpperCase()}</div>
-        <div className="col-md-3 pull-left mobile-signout">
-            <Link to={{
-                  pathname: '/login',
-                  state: {
-                    logout: true
-                  }
-            }}><button type="button" className="btn btn-danger transparent pull-right">Sign Out</button>
-          </Link>
-        </div>
-      </header>
-        <input type="search" className="searchBar col-md-3 pull-left" onChange={event=> handleSearch(event.target)} placeholder="Search Planets"/>
-        <button type="button" className="loadmore-btn btn btn-success transparent pull-left" data-pointer={loading} onClick={event => setPage(handleNavigationHelper(event.target))} data-nav={next}>{loading === "block" ? "loading..." : "Load More"}</button>
-        <p  className="count col-md-2 pull-left text-white">Showing: {planets.length} of {count ? count : 0}</p>
-        <div className="planet-list col-md-12 col-xs-12 style-2 scrollbar">
-          <div className="col-md-12 text-white">The image size inside the tiles denotes the comparative size of planet's population</div>
-          {restricted !== "" ? (<div className="alert alert-danger">{restricted}</div>) : ""}
-            {planets.map((results,key) => (
-                <Cards key={results.name +key} key={key} results={results} handleShowModal={handleShowModal}/>
-            ))}
-            <Info handleClose={handleClose} modalData={modalData} show={show}/>
-            {planets.length === 0 && loading === "none" ? (<p style={{color: "#fff",margin: "15px"}}>No record found</p>) : ("")}
-            <div className="spinner" style={{display: `${loading}`}}></div>
-        </div>
+      <PlanetHeader username={username}/>
+      <SearchInput handleSearch={handleSearch}/>
+      <button type="button" className="loadmore-btn btn btn-success transparent pull-left" data-pointer={loading} onClick={event => setPage(handleNavigationHelper(event.target))} data-nav={next}>{loading === "block" ? "loading..." : "Load More"}</button>
+      <p  className="count col-md-2 pull-left text-white">Showing: {planets.length} of {count ? count : 0}</p>
+      <PlanetBody handleShowModal={handleShowModal} restricted={restricted} planets={planets} handleClose={handleClose} modalData={modalData} show={show} loading={loading}/>
     </div>
   )
 }

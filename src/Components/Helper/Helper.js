@@ -10,8 +10,7 @@ const extractPages = (page) =>{
 export const generateRandom = () => {
   return Math.floor(Math.random() * 3);
  }
-
-
+ 
 export const handleNavigationHelper = target => {
     var val = extractPages(target.getAttribute("data-nav"));
     if(val && val !== null){

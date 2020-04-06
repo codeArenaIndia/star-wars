@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Redirect } from "react-router-dom";
-import { Button, FormGroup, FormControl } from "react-bootstrap";
-import "./Login.css";
-import { useLocation } from "react-router-dom";
+import { Redirect,useLocation } from "react-router-dom";
+import LoginHeader from '../Components/Presentational/Login-Header';
+import {TextInput, PasswordInput} from '../Components/Input'
+import { Button} from "react-bootstrap";
 import axios from 'axios';
+import "../Components/Helper/Style/Login.css";
 
 export default function Login(props) {
   const [username, setUsername] = useState("");
@@ -20,10 +21,11 @@ export default function Login(props) {
   if (location.state && location.state.logout === true) {
     localStorage.removeItem("user");
   }
-  function validateForm() {
+
+ function validateForm() {
     return username.length > 0 && password.length > 0;
   }
-
+  
   async function handleSubmit(event) {
     event.preventDefault();
     setLoading(true);
@@ -47,31 +49,12 @@ export default function Login(props) {
 
   return (
     <div className="Login">
-      <h1 className="col-md-5 title">Galactic Empire</h1>
-      <h2 className="col-md-12 login-title text-white">Login</h2>
+      <LoginHeader/>
       <form onSubmit={handleSubmit}>
-      <h5 className="col-md-12 login-title force-with-u">May the force be with you</h5>
-        <FormGroup controlId="username" >
-          <label className="text-white">Username (case-insensitive)</label>
-          <FormControl
-            autoFocus
-            type="text"
-            value={username}
-            onChange={e => setUsername(e.target.value)}
-          />
-        </FormGroup>
-        <FormGroup controlId="password" >
-          <label  className="text-white">Password</label>
-          <FormControl
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            type="password"
-          />
-        </FormGroup>
-        <Button block className="btn-success"  disabled={!validateForm()} type="submit">
-            {loading ? "Loading..." : "Login"}
-        </Button>
-        {loginError ? (<div style={{marginTop:"20px"}} className="alert alert-danger alert-dismissible fade show">Invalid Credentials</div>) : ("")}
+            <TextInput username={username} setUsername={setUsername}/>
+            <PasswordInput setPassword={setPassword} password={password}/>
+            <Button block className="btn-success"  disabled={!validateForm()} type="submit">{loading ? "Loading..." : "Login"}</Button>
+            {loginError ? (<div style={{marginTop:"20px"}} className="alert alert-danger alert-dismissible fade show">Invalid Credentials</div>) : ("")}
       </form>
     </div>
   );
