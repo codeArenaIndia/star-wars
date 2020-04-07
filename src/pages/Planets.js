@@ -1,4 +1,4 @@
-import React , {useState, useEffect } from 'react';
+import React , {useState } from 'react';
 import { handleNavigationHelper, debounce ,updateCounter} from '../Components/Helper/Helper'
 import PlanetHeader from '../Components/Presentational/Planet-Header';
 import PlanetBody from '../Components/Presentational/Planet-Body';
@@ -21,12 +21,6 @@ export default function Planets(){
   const handleShow = () => setShow(true);
 
   /****************************Mounting,Unmounting and Updating code starts*****************/
-  useEffect(()=>{
-    getResults(query,page);
-    setUsername(JSON.parse(localStorage.getItem('counter')).username);
-  },[query,page]);
-
-
   const getResults = async(queries,pages) =>{
     if(!updateCounter()){
       setPlanets([]);
@@ -61,6 +55,13 @@ export default function Planets(){
     setQuery(target.value);
     setPage(1);
   }, 600);
+  
+
+  React.useEffect(()=>{
+    getResults(query,page);
+    setUsername(JSON.parse(localStorage.getItem('counter')).username);
+  },[query,page]);
+
   /****************************Mounting,Unmounting and Updating ends*****************/
 
   /*****************Onclick modal box code starts *****************************/

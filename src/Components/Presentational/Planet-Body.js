@@ -8,7 +8,7 @@ export default function PlanetBody({restricted,planets,handleClose,modalData,sho
           <div className="col-md-12 text-white">The image size inside the tiles denotes the comparative size of planet's population</div>
           {restricted !== "" ? (<div className="alert alert-danger">{restricted}</div>) : ""}
             {planets.map((results,key) => (
-                <Cards key={results.name +key} key={key} results={results} handleShowModal={handleShowModal}/>
+                <Cards key={results.name +key}  results={results} handleShowModal={handleShowModal}/>
             ))}
             <Info handleClose={handleClose} modalData={modalData} show={show}/>
             {planets.length === 0 && loading === "none" ? (<p style={{color: "#fff",margin: "15px"}}>No record found</p>) : ("")}

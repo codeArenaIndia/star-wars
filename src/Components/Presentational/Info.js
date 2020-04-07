@@ -1,8 +1,7 @@
-import React, {useEffect,useState} from 'react';
+import React from 'react';
 import { Modal } from 'react-bootstrap';
 
 export default function Info({modalData,show,handleClose}){
-    console.log(modalData);
 return(
     <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>

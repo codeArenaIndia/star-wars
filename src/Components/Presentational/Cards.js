@@ -1,4 +1,4 @@
-import React , {useState, useEffect } from 'react';
+import React from 'react';
 import {  generateRandom } from '../Helper/Helper';
 
 function Cards({results,handleShowModal}){
